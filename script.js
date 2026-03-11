@@ -32,10 +32,12 @@
     dot.style.transform = 'translate(' + (mouseX - 4) + 'px, ' + (mouseY - 4) + 'px)';
   });
 
+  var isHovering = false;
   (function animateCursor() {
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
-    ring.style.transform = 'translate(' + (ringX - 15) + 'px, ' + (ringY - 15) + 'px)';
+    var scale = isHovering ? 1.6 : 1;
+    ring.style.transform = 'translate(' + (ringX - 15) + 'px, ' + (ringY - 15) + 'px) scale(' + scale + ')';
     requestAnimationFrame(animateCursor);
   }());
 
@@ -50,8 +52,14 @@
 
   var hoverEls = document.querySelectorAll('a, button, .team-card, .feat-card, .rule-item, .credit-item, .h-stat, .sb-stat');
   hoverEls.forEach(function (el) {
-    el.addEventListener('mouseenter', function () { document.body.classList.add('cur-hover'); });
-    el.addEventListener('mouseleave', function () { document.body.classList.remove('cur-hover'); });
+    el.addEventListener('mouseenter', function () {
+      document.body.classList.add('cur-hover');
+      isHovering = true;
+    });
+    el.addEventListener('mouseleave', function () {
+      document.body.classList.remove('cur-hover');
+      isHovering = false;
+    });
   });
 
   /* ---- NAV SCROLL ---- */
@@ -178,7 +186,8 @@
   /* ---- TEAM METER BARS ---- */
   function animateMeters() {
     document.querySelectorAll('.team-meter-fill').forEach(function (el) {
-      el.style.width = el.dataset.w + '%';
+      var pct = parseInt(el.dataset.w, 10) / 100;
+      el.style.transform = 'scaleX(' + pct + ')';
     });
   }
 
