@@ -146,7 +146,7 @@
   var phrases = [
     'OPFOR vs BLUFOR vs INFOR',
     'Capture. Hold. Dominate.',
-    '48 Players | 3 Teams | 1 King',
+    '128 Players | 3 Teams | 1 King',
     'Ground & Air Combat',
     'Rank Up. Prestige. Destroy.',
     'No mercy. No respite.'
